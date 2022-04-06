@@ -21,8 +21,6 @@ function Home() {
     }
   }, [dispatch, status]);
 
-  console.log(data);
-
   if (status === "failed") {
     return <Error message={error} />;
   }
