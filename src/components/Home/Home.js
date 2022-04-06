@@ -10,6 +10,8 @@ function Home() {
   const data = useSelector((state) => state.characters.items);
   const isLoading = useSelector((state) => state.characters.isLoading);
   const error = useSelector((state) => state.characters.error);
+  const nextPage = useSelector((state) => state.characters.page);
+  const hasNextPage = useSelector((state) => state.characters.hasNextPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,10 +19,6 @@ function Home() {
   }, [dispatch]);
 
   console.log(data);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   if (error) {
     return <Error message={error} />;
@@ -44,6 +42,16 @@ function Home() {
           </div>
         ))}
       </Masonry>
+
+      <div style={{ textAlign: "center", padding: 10 }}>
+        {isLoading && <Loading />}
+        {hasNextPage && !isLoading && (
+          <button onClick={() => dispatch(fetchCharacters(nextPage))}>
+            Next Page ({nextPage})
+          </button>
+        )}
+        {!hasNextPage && <div>There is no data to be shown.</div>}
+      </div>
     </div>
   );
 }
