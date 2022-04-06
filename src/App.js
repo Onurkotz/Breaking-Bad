@@ -11,8 +11,8 @@ function App() {
     <Router>
       
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/" element={<Home />} exact />
+          <Route path="/char/:char_id" element={<Detail />} />
         </Routes>
       
     </Router>
